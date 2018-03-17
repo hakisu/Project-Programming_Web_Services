@@ -1,0 +1,60 @@
+<style>
+    .modal-header, h4, .close {
+        background-color: #5cb85c;
+        color: white !important;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .modal-body {
+    }
+
+    .modal-footer {
+        background-color: #f9f9f9;
+        text-align: center
+    }
+
+    .no-resize {
+        resize: none;
+    }
+</style>
+
+<div id="writeEmail" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Write new internal e-mail</h4>
+            </div>
+
+            <form name="writeEmailForm" class="ng-pristine ng-untouched ng-valid" ng-submit="ctrl.sendEmail()">
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="form-group panel-body">
+                            <label for="personId">To</label>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <select id="personId" ng-model="ctrl.emailToSent.receiverId"
+                                            ng-options="person._id as person.firstName + ' ' + person.lastName for person in ctrl.persons"
+                                            class="form-control"></select>
+                                </div>
+                            </div>
+                            <label for="emailSubject">Subject</label>
+                            <input id="emailSubject" type="text" ng-model="ctrl.emailToSent.title" class="form-control"
+                                   placeholder="E-mail subject" required/>
+
+                            <label for="emailContent">Content</label>
+                            <textarea id="emailContent" class="form-control no-resize" rows="8"
+                                      ng-model="ctrl.emailToSent.data" placeholder="E-mail content"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" ng-disabled="writeEmailForm.$invalid">
+                            <span class="glyphicon glyphicon-envelope"></span><br/>Send e-mail
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

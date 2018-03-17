@@ -1,0 +1,35 @@
+<div ng-include="'html/writeEmail.html'"></div>
+
+<h3>E-mails
+    <button type="button" class="btn btn-info" ng-click="ctrl.refresh()">
+        <span class="glyphicon glyphicon-refresh"></span>
+    </button>
+    <button type="button" class="btn btn-success" ng-show="ctrl.userLogged" ng-click="ctrl.writeEmail()">
+        Send e-mail
+    </button>
+</h3>
+<div class="row">
+    <div class="col-xs-3">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>From</th>
+                <th>Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="email in ctrl.emailMessages | orderBy : 'sentTime' : true" ng-click="ctrl.readEmail(email)">
+                <td ng-bind="email.sender"></td>
+                <td ng-bind="email.title"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-xs-9">
+        <p class="bg-primary" ng-show="ctrl.currentEmail">Email from : {{ctrl.currentEmail.sender}} <br/>
+            {{ctrl.currentEmail.sentTime | date : "dd.MM.yyyy hh:mm"}}</p>
+        <p class="bg-success" ng-show="ctrl.currentEmail">Title : <span>{{ctrl.currentEmail.title}}</span></p>
+        <div class="well well-lg" ng-show="ctrl.currentEmail">
+            <p>{{ctrl.currentEmail.data}}</p>
+        </div>
+    </div>
+</div>

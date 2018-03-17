@@ -1,0 +1,3 @@
+[
+	{ "$sort": { "lastName": 1, "firstName": 1 } }
+]

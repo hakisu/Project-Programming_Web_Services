@@ -1,0 +1,34 @@
+<div id="editTask" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit a task</h4>
+			</div>
+			<form name="editForm" class="ng-pristine ng-untouched ng-valid" ng-submit="ctrl.editSubmit()">
+			<div class="modal-body">
+				<div class="panel panel-default">
+					<div class="panel-heading" ng-bind="ctrl.task._id ? 'Editing a task, id '+ctrl.task._id : 'New task'">
+						<span ng-hide="editForm.$valid" class="label label-warning">incomplete data</span>
+					</div>
+					<div class="form-group panel-body">
+					<label for="description">Description</label>
+					<input id="description" type="text" ng-model="ctrl.task.description" class="form-control" required="" placeholder="Description"/>
+					<label for="projectId">Project</label>
+					<select id="projectId" ng-model="ctrl.task.projectId" ng-options="project._id as project.name for project in ctrl.projects" class="form-control"/>
+					<label for="workers">Workers</label>
+					<select multiple id="workers" ng-model="ctrl.task.workersIds" ng-options="person._id as person.firstName+' '+person.lastName for person in ctrl.persons" class="form-control"/>
+					<label for="deadline">Deadline</label>
+					<input id="deadline" type="date" ng-model="ctrl.task.deadline" class="form-control" required="" placeholder="Deadline"/>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary glyphicon glyphicon-ok" ng-disabled="editForm.$invalid"/>
+				<button type="button" class="btn btn-danger glyphicon glyphicon-trash" ng-click="ctrl.confirmRemove()" ng-disabled="!ctrl.task._id"/>
+				<button type="button" class="btn btn-default glyphicon glyphicon-remove" data-dismiss="modal"/>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>

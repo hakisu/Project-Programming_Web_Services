@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="app" class="ng-scope">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+            display: none !important;
+        }
+
+        ng\:form {
+            display: block;
+        }</style>
+    <meta charset="utf-8">
+    <title>App</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body class="ng-scope top-buffer" ng-controller="Menu as ctrl">
+
+<div class="container-fluid">
+
+    <ng-include src="'html/login.html'"></ng-include>
+    <ng-include src="'html/confirmDialog.html'"></ng-include>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+
+        <div style="position: fixed; top: 0; left: 50%; transform: translateX(-50%); text-align: center; width: 500px; max-width: 80%; z-index: 10000">
+            <uib-alert class="animated" type="warning" close="ctrl.closeAlert()" dismiss-on-timeout="5000"
+                       ng-if="ctrl.lastMessage.message">{{ctrl.lastMessage.message}}
+            </uib-alert>
+        </div>
+
+
+        <div class="container-fluid">
+
+            <div class="collapse navbar-collapse" id="mynavbar-content">
+
+                <ul class="nav navbar-nav">
+                    <li ng-class="ctrl.navClass('/')">
+                        <a href="#/"><span class="glyphicon glyphicon-home"></span></a>
+                    </li>
+                    <li ng-repeat="menuPos in ctrl.menu" ng-class="ctrl.navClass(menuPos.route)">
+                        <a href="#{{menuPos.route}}">{{menuPos.title}}</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-show="ctrl.loggedUser"><a href="#/" ng-click="ctrl.confirmLogOut()">{{ctrl.loggedUser.firstName
+                        + ' ' + ctrl.loggedUser.lastName}} <span class="glyphicon glyphicon-log-out"></span></a></li>
+                    <li ng-hide="ctrl.loggedUser"><a href="#/" ng-click="ctrl.logIn()">not logged in <span
+                            class="glyphicon glyphicon-log-in"></span></a></li>
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!--Content of the current page-->
+    <div ng-view></div>
+</div>
+
+<script src="/js/angular.min.js"></script>
+<script src="/js/angular-route.min.js"></script>
+<script src="/js/angular-cookies.min.js"></script>
+<script src="/js/angular-websocket.min.js"></script>
+<script src="/js/angular-animate.min.js"></script>
+<script src="/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
+
+<script src="/js/app.js"></script>
+<script src="/js/home.js"></script>
+<script src="/js/persons.js"></script>
+<script src="/js/projects.js"></script>
+<script src="/js/tasks.js"></script>
+<script src="/js/menu.js"></script>
+<script src="/js/messages.js"></script>
+<script src="/js/emails.js"></script>
+
+</body>
+</html>

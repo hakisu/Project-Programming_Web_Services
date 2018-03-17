@@ -1,0 +1,32 @@
+<ng-include src="'/html/editPerson.html'"></ng-include>
+
+<div class="row col-lg-12">
+    <h3>Persons</h3>
+
+    <table class="table table-striped table-hover">
+
+        <thead class="thead-default">
+        <tr>
+            <th>
+                <button class="btn btn-primary glyphicon glyphicon-plus" ng-click="ctrl.edit()"/>
+            </th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>e-mail</th>
+            <th>Roles</th>
+        </tr>
+        </thead>
+
+        <tbody class="tbody-default">
+        <tr ng-repeat="person in ctrl.persons" ng-click="ctrl.edit(person._id)">
+            <td ng-bind="person._id" scope="row" style="width: 1px"></td>
+            <td ng-bind="person.firstName"></td>
+            <td ng-bind="person.lastName"></td>
+            <td ng-bind="person.email"></td>
+            <td ng-bind="person.roles"></td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>

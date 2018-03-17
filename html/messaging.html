@@ -1,0 +1,62 @@
+<style>
+    .panel {
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+    .panel-body {
+        height: 50vh;
+        overflow-y: scroll;
+    }
+</style>
+
+<h3>Messaging
+</h3>
+<div class="container">
+    <div style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); text-align: center; width: 500px; max-width: 80%; z-index: 10000">
+        <uib-alert class="animated" type="warning" close="ctrl.closeAlert()" dismiss-on-timeout="4000"
+                   ng-if="ctrl.messageAppeared">{{ctrl.messageAppeared}}
+        </uib-alert>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading input-lg">
+            Chat
+            <div class="form-inline pull-right">
+                <label for="palSelector">Talk with</label>
+                <select id="palSelector" ng-model="ctrl.currentPal"
+                        ng-options="person as person.firstName + ' ' + person.lastName for person in ctrl.persons"
+                        class="form-control input-sm"
+                        ng-change="ctrl.refresh()">
+                </select>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <tr ng-repeat="message in ctrl.messages | orderBy : 'sentTime'">
+                    <td class="col-xs-2">
+                        {{message.sentTime | date : "HH:mm dd.MM.yyyy"}}
+                    </td>
+                    <td class="col-xs-2">
+                        {{message.sender}}
+                    </td>
+                    <td class="col-xs-8">
+                        {{message.data}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <form>
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="ctrl.newChatMsg" placeholder="Write message"/>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="submit" ng-click="ctrl.sendNewChatMsg()"
+                              ng-disabled="ctrl.newChatMsg==''">Send</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

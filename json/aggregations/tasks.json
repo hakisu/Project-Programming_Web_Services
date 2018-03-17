@@ -1,0 +1,8 @@
+[
+	{ "$sort": { "description": 1 } },
+	{ "$lookup": { "from": "projects", "localField": "projectId", "foreignField": "_id", "as": "project" } },
+	{ "$addFields": { "managerId": "$project.managerId"} },
+	{ "$lookup": { "from": "persons", "localField": "managerId", "foreignField": "_id", "as": "manager" } },
+	{ "$lookup": { "from": "persons", "localField": "workersIds", "foreignField": "_id", "as": "workers" } },
+	{ "$lookup": { "from": "tasks", "localField": "dependsOnIds", "foreignField": "_id", "as": "dependsOn" } }
+]

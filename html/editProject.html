@@ -1,0 +1,35 @@
+<div id="editProject" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit a project</h4>
+			</div>
+			<form name="editForm" class="ng-pristine ng-untouched ng-valid" ng-submit="ctrl.editSubmit()">
+			<div class="modal-body">
+				<div class="panel panel-default">
+					<div class="panel-heading" ng-bind="ctrl.project._id ? 'Editing a project, id '+ctrl.project._id : 'New project'">
+						<span ng-hide="editForm.$valid" class="label label-warning">incomplete data</span>
+					</div>
+					<div class="form-group panel-body">
+					<label for="firstName">Name</label>
+					<input id="firstName" type="text" ng-model="ctrl.project.name" class="form-control" required="" placeholder="Name"/>
+					<label for="description">Description</label>
+					<input id="description" type="text" ng-model="ctrl.project.description" class="form-control" required="" placeholder="Description"/>
+					<label for="managerId">Manager</label>
+					<select id="managerId" ng-model="ctrl.project.managerId" ng-options="person._id as person.firstName + ' ' + person.lastName for person in ctrl.persons" class="form-control"/>
+					<!--select id="managerId" name="managerId" ng-model="ctrl.project.managerId">
+						<option ng-repeat="person in ctrl.persons" ng-value="person._id" class="form-control">{{ person.firstName + ' ' + person.lastName }}</option>
+					</select-->
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary glyphicon glyphicon-ok" ng-disabled="editForm.$invalid"/>
+				<button type="button" class="btn btn-danger glyphicon glyphicon-trash" ng-click="ctrl.confirmRemove()" ng-disabled="!ctrl.project._id"/>
+				<button type="button" class="btn btn-default glyphicon glyphicon-remove" data-dismiss="modal"/>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
